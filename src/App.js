@@ -1,14 +1,13 @@
-import logo from './logo.svg';
 import './App.css';
-import HomePage from './components/pages/HomePage';
+import HomePage from './pages/HomePage';
 import { Route, Routes } from 'react-router-dom';
-import Page404 from './components/pages/Page404';
+import Page404 from './pages/Page404';
 import OnHold from './components/onhold/OnHold';
 import InProgess from './components/inprogess/InProgess';
 import Finished from './components/finished/Finished';
 import React from 'react';
-import Login from './components/pages/Login';
-import Registration from './components/pages/Registration';
+import Login from './pages/Login';
+import Registration from './pages/Registration';
 
 
 export const UserContext = React.createContext();
