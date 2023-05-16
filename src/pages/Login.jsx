@@ -1,7 +1,38 @@
-import React from 'react'
+import axios from 'axios';
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 function Login() {
+  const [emailClient, setEmail] = useState("");
+  const [passwordClient, setPassword] = useState("");
+
+  const handelChageEmail = (e) =>{
+    e.preventDefault();
+    setEmail(e.target.value)
+  }
+
+  const handelChagePassword = (e) =>{
+    e.preventDefault();
+    setPassword(e.target.value)
+  }
+
+  const submitForm = (e) => {
+    e.preventDefault();
+
+    axios.post("http://localhost:8080/user/login",{
+      email: emailClient,
+      password: passwordClient
+    },{
+      headers:{
+        "Content-Type" : "application/json"
+      }
+    }).then(res => {
+      console.log(res);
+    }).catch(err => {
+      console.log(err);
+    })
+  }
+
   return (
     <>
       <div className='mx-auto py-10  text-cyan-950 font-bold  bg-slate-200'>
@@ -11,10 +42,10 @@ function Login() {
       </div>
       <div className='mx-auto text-center mt-6 bg-slate-200  w-80 h-80 rounded-lg'>
         <div>
-          <form>
+          <form onSubmit={submitForm}>
             <div  className='flex flex-col items-center mx-auto justify-around py-6 w-80 h-80 '>
-              <input type="text" placeholder='Enter your username' className='w-full px-3 py-3'/>
-              <input type="password" placeholder='Enter your password' className='w-full px-3 py-3'/>
+              <input type="text" placeholder='Enter your email' className='w-full px-3 py-3' onChange={handelChageEmail}/>
+              <input type="password" placeholder='Enter your password' className='w-full px-3 py-3' onChange={handelChagePassword}/>
               <button type='submit' className=' bg-slate-300 hover:bg-slate-600 hover:text-cyan-50 px-10 py-2'>LogIn</button>
               </div>
           </form>
