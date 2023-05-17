@@ -9,12 +9,8 @@ import React from 'react';
 import Login from './pages/Login';
 import Registration from './pages/Registration';
 
-
-export const UserContext = React.createContext();
-
 function App() {
   return (
-    <UserContext.Provider value={""}>
       <Routes>
           <Route path='/' element={<HomePage/>}/>
           <Route path='/onhold' element={<OnHold/>}/>
@@ -24,7 +20,6 @@ function App() {
           <Route path='/registration' element={<Registration/>}/>
           <Route path='*' element={<Page404/>}/>
       </Routes>
-    </UserContext.Provider>
   );
 }
 

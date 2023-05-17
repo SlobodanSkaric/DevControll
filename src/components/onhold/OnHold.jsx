@@ -1,11 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react'
 import Header from '../Header'
-import { UserContext } from '../../App'
 import { useNavigate } from 'react-router-dom';
 
 function OnHold() {
-    const userCon = useContext(UserContext);
-    const [user, setUser] = useState(userCon);
+    const [user, setUser] = useState();
     const navigate = useNavigate();
 
     useEffect(() => {

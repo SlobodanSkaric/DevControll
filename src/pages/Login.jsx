@@ -1,17 +1,22 @@
 import axios from 'axios';
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
+import AuthContext from '../context/AuthProvider';
 
 function Login() {
+  const {auth,setAuth} =  useContext(AuthContext);
   const [emailClient, setEmail] = useState("");
   const [passwordClient, setPassword] = useState("");
+  const [username, setUsername] = useState("");
+  const [userId, setUserId] = useState("");
+  const [token, setToken] = useState("");
 
-  const handelChageEmail = (e) =>{
+  const handleChangeEmail  = (e) =>{
     e.preventDefault();
     setEmail(e.target.value)
   }
 
-  const handelChagePassword = (e) =>{
+  const handleChangePassword  = (e) =>{
     e.preventDefault();
     setPassword(e.target.value)
   }
@@ -27,7 +32,16 @@ function Login() {
         "Content-Type" : "application/json"
       }
     }).then(res => {
-      console.log(res);
+
+      setUsername(res.data.username);
+      setUserId(res.data.userId);
+      setToken(res.data.token);
+
+      localStorage.setItem("user_token", res.data.username);
+      localStorage.setItem("username", res.data.username);
+      localStorage.setItem("userId", res.data.userId);
+
+      window.location.replace("/")
     }).catch(err => {
       console.log(err);
     })
@@ -44,8 +58,8 @@ function Login() {
         <div>
           <form onSubmit={submitForm}>
             <div  className='flex flex-col items-center mx-auto justify-around py-6 w-80 h-80 '>
-              <input type="text" placeholder='Enter your email' className='w-full px-3 py-3' onChange={handelChageEmail}/>
-              <input type="password" placeholder='Enter your password' className='w-full px-3 py-3' onChange={handelChagePassword}/>
+              <input type="text" placeholder='Enter your email' className='w-full px-3 py-3' onChange={handleChangeEmail}/>
+              <input type="password" placeholder='Enter your password' className='w-full px-3 py-3' onChange={handleChangePassword}/>
               <button type='submit' className=' bg-slate-300 hover:bg-slate-600 hover:text-cyan-50 px-10 py-2'>LogIn</button>
               </div>
           </form>

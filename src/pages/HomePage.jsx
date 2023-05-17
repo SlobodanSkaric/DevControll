@@ -1,28 +1,16 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { UserContext } from "../App"
 import Header from '../components/Header';
+import AuthContext from '../context/AuthProvider';
 
 function HomePage() {
-    const userCon = useContext(UserContext);
+  const {auth} = useContext(AuthContext);
+  const [user, setUserName] = useState({});
 
-    const [user, setUser] = useState("");
-
-    useEffect(() => {
-        if(userCon === ""){
-            setUser("");
-        }else{
-            setUser(userCon)
-        }
-
-        return () => {
-            setUser("")
-        }
-    },[userCon]);
-    
+  console.log(auth);
   return (
     <div className=' mx-auto bg-slate-100'>
-      <Header userName={{username: user}}/>
+      <Header userName={{username: auth}}/>
       <main className=' w-3/5 mx-auto mt-10'>
         <div className='flex justify-between'>
 
